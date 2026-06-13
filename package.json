@@ -8,8 +8,10 @@
     "opencolaos": "./src/cli/index.ts"
   },
   "scripts": {
-    "start": "bun run src/cli/index.ts",
-    "dev": "bun --watch src/cli/index.ts",
+    "start": "bun run src/cli/chat.ts",
+    "chat": "bun run src/cli/chat.ts",
+    "cli": "bun run src/cli/index.ts",
+    "dev": "bun --watch src/cli/chat.ts",
     "build": "bun build src/index.ts --outdir dist"
   },
   "private": true,
@@ -21,6 +23,7 @@
     "typescript": "^5"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.104.1",
     "date-fns": "^4.4.0",
     "nanoid": "3",
     "uuid": "^14.0.0",
