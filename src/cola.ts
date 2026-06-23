@@ -34,7 +34,7 @@ export class Cola {
   readonly dream: DreamEngine;
   readonly interrupt: InterruptProtocol;
 
-  private conversationLog: string[] = [];
+  conversationLog: string[] = [];
 
   constructor(options: ColaOptions = {}) {
     this.store = new MemoryStore(options.dbPath);
@@ -151,6 +151,11 @@ export class Cola {
     return this.store.getUserProfile();
   }
 
+  /** 记录对话日志（供外部子系统使用） */
+  pushLog(entry: string): void {
+    this.conversationLog.push(entry);
+  }
+
   /** 手动添加用户信息 */
   learnAboutUser(fact: string, category: "fact" | "preference" | "habit" | "goal"): void {
     this.identity.learnAboutUser(fact, category);
@@ -196,7 +201,7 @@ export class Cola {
     }
   }
 
-  private buildSystemPrompt(context: ContextQuery, memories: MemoryEntry[]): string {
+  buildSystemPrompt(context: ContextQuery, memories: MemoryEntry[]): string {
     let prompt = "";
 
     // Core identity
